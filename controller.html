@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module('myApp', []);
+app.service('niro',function(){
+  this.validate=function(x,y){
+    if(x =="nirosha" && y == "nirosha") {
+	   return true;
+  }else { return false; }
+}});
+app.controller('loginctrl', function($scope,$rootScope,niro) {
+$rootScope.login=true;
+ $rootScope.home = false;
+     $scope.userName='';
+     $scope.pwd='';
+$scope.toggle=function(){
+     var valid=niro.validate($scope.userName,$scope.pwd);
+	 if(valid == true){
+		 $rootScope.login=false;
+ $rootScope.home = true;
+	 }
+	 
+   }
+});
+app.controller('mainctrl',function($scope,$rootScope){
+   $rootScope.login=true;
+ $rootScope.home = false;
+ $scope.toggle1=function(){
+    
+		 $rootScope.login=true;
+ $rootScope.home = false;
+	 }
+});
+app.controller('welctrl',function($scope,$rootScope){
+  
+});
+</script>
+<head>
+<style>
+.p{
+   width:100%;
+   height:40px;
+   background-color:lightgreen;
+   }
+.k{
+   max-width:100%;
+   height:800px;
+   background-image:url("11.jpg");
+   }
+ strong{
+    color:white;
+	}
+ p{
+  font-size:170%;
+  color:white;
+  }
+</style>
+</head>
+<body>
+<div class="p">
+</div>
+<div class="k" ng-controller="mainctrl">
+<div  ng-controller="loginctrl" ng-show="login" style='padding-top:100px';>
+<center><p>LOGIN</p>
+<table align="center"><tr><td>
+<tr><td><strong>USERNAME:</strong></td><td><input type='text' style='background-color:lightgreen;color:black; font-weight:bold;' ng-model='userName'  value='' required="required"></td></tr>
+<tr><td></tr></td>
+<tr><td></tr></td>
+<tr><td><strong>PASSWORD:</strong></td><td><input type='password' style='background-color:lightgreen;color:black; font-weight:bold;' ng-model='pwd'  value='' required="required"></td></tr>
+<tr><td></tr></td>
+<tr><td></tr></td>
+<tr><td>&nbsp;</td><td><input type='submit'  value='LOGIN' ng-click="toggle();"/></td></tr>
+</tr></td></table>
+</center>
+</div>
+<div ng-controller="welctrl" ng-show="home" style='padding-top:160px';>
+<center>
+<p>welcome to home page</p>
+<table align="center"><tr><td>
+<tr><td>&nbsp;</td><td><input type='submit'  value='LOGOUT' ng-click="toggle1();"/></td></tr>
+</tr></td></table>
+</div>
+</center>
+</div>
+<div class="p">
+</div>
+</body>
+</html>
